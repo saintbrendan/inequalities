@@ -31,7 +31,7 @@ public class Graph {
             int solution = i + e.weight;
             if (minValues[v] < solution) {
                 if (color[v] == Color.GREY) {
-                    throw new IllegalStateException("Inconsistent inequalities");
+                    throw new IllegalStateException("Inconsistent graph");
                 }
                 dfsSolution(v, solution);
             }
