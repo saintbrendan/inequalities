@@ -20,13 +20,6 @@ class GraphTest {
     }
 
     @Test
-    void oneNodeisConsistent() {
-        g.node(0);
-
-        assertTrue(g.isConsistent());
-    }
-
-    @Test
     void oneNodeSolutionIs1() {
         g.node(0);
 
@@ -119,99 +112,8 @@ class GraphTest {
 
         assertTrue(g.getMinSolution()[0] == 1);
         assertTrue(g.getMinSolution()[1] == 2); // leftSubtree
-        assertTrue(g.getMinSolution()[2] == 4); // leftLeaf
+        assertTrue(g.getMinSolution()[2] == 4); // leftLeaf ( > rightLeaf)
         assertTrue(g.getMinSolution()[3] == 2); // rightSubtree
         assertTrue(g.getMinSolution()[4] == 3); // rightLeaf ( < leftLeaf)
-    }
-
-
-    @Test
-    void weakInequalityLoopIsConsistent() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        n0.lte(n1);
-        n1.lte(n0);
-
-        assertTrue(g.isConsistent());
-    }
-
-    @Test
-    void strongInequalityLoopIsInconsistent0() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        n0.lte(n1);
-        n1.lt(n0);
-
-        assertFalse(g.isConsistent());
-    }
-
-    @Test
-    void strongInequalityLoopisInconsistent1() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        n0.lt(n1);
-        n1.lte(n0);
-
-        assertFalse(g.isConsistent());
-    }
-
-    @Test
-    void longWeakInequalityLoopIsConsistent() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        Node n2 = g.node(2);
-        Node n3 = g.node(3);
-        Node n4 = g.node(4);
-        n0.lte(n1);
-        n1.lte(n2);
-        n2.lte(n3);
-        n3.lte(n4);
-        n4.lte(n0);
-
-        assertTrue(g.isConsistent());
-    }
-
-    @Test
-    void longStrongInequalityLoopIsInconsistent() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        Node n2 = g.node(2);
-        Node n3 = g.node(3);
-        Node n4 = g.node(4);
-        n0.lte(n1);
-        n1.lte(n2);
-        n2.lt(n3);
-        n3.lte(n4);
-        n4.lte(n0);
-
-        assertFalse(g.isConsistent());
-    }
-
-    @Test
-    void strongInequalitesAcrossShortSubtreesIsConsistent() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        Node n2 = g.node(2);
-        n0.lt(n1);
-        n0.lt(n2);
-        n2.lt(n1);
-
-        assertTrue(g.isConsistent());
-    }
-
-    @Test
-    void strongInequalitesAcrossSubtreesIsConsistent() {
-        Node n0 = g.node(0);
-        Node n1 = g.node(1);
-        Node n2 = g.node(2);
-        Node n3 = g.node(3);
-        Node n4 = g.node(4);
-        n0.lt(n1);
-        n1.lt(n2);
-        n0.lt(n3);
-        n3.lt(n4);
-        n4.lt(n2);
-
-        assertTrue(g.isConsistent());
     }
 }

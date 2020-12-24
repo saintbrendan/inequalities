@@ -54,47 +54,6 @@ public class Graph {
         }
     }
 
-    boolean isConsistent() {
-        mark = new int[nodes.size()];
-        p = new int[nodes.size()];
-        color = new Color[nodes.size()];
-        Arrays.fill(mark, 0);
-        Arrays.fill(p, -1);
-        Arrays.fill(color, Color.WHITE);
-        for (int u = 0; u < nodes.size(); u++) {
-            if (!DFS(u)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean DFS(int u) {
-        mark[u] = 1;
-        color[u] = Color.GREY;
-        for (Edge e : nodes.get(u).adjacencyList) {
-            int v = e.to;
-            stack.push(new EdgeWeight(u, e.weight));
-            if (color[v] == Color.GREY) {
-                // check if any weights of 1 in the cycle
-                for (int i = stack.size() - 1; i >= v; i--) {
-                    if (stack.get(i).weight == 1) {
-                        return false;  // NOT consistent
-                    }
-                }
-            }
-            if (mark[v] == 0) {
-                p[v] = u;
-                if (DFS(v) == false) {
-                    return false;
-                }
-            }
-            stack.pop();
-        }
-        color[u] = Color.BLACK;
-        return true;
-    }
-
     private class Edge {
         private final int weight;
         private final int to;
