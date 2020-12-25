@@ -1,13 +1,14 @@
 package com.cunnie.columbia.alganal4231;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
 
 public class Graph {
     private ArrayList<Node> nodes = new ArrayList<>();
-    private int[] mark;
-    private int[] p;
     private Color[] color;
-    private java.util.Stack<EdgeWeight> stack = new Stack<>();
+    private java.util.Stack<Edge> stack = new Stack<>();
     private int[] minValues;
 
     int[] getMinSolution() {
@@ -43,7 +44,9 @@ public class Graph {
         private int nodeNumber;
         private List<Edge> adjacencyList = new ArrayList<>();
 
-        private Node(int nodeNumber) {this.nodeNumber = nodeNumber;}
+        private Node(int nodeNumber) {
+            this.nodeNumber = nodeNumber;
+        }
 
         void lt(Node to) {
             adjacencyList.add(new Edge(1, to.nodeNumber));
@@ -73,15 +76,5 @@ public class Graph {
 
     private enum Color {
         WHITE, GREY, BLACK;
-    }
-
-    private class EdgeWeight {
-        int from;
-        int weight;
-
-        EdgeWeight(int from, int weight) {
-            this.from = from;
-            this.weight = weight;
-        }
     }
 }
